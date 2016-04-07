@@ -1,0 +1,12 @@
+{
+  "name": "Redirect",
+  "properties": {
+    "distractions": {
+      "type": "array",
+      "required": true,
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

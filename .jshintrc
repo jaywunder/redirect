@@ -5,6 +5,7 @@
   "browser": true,
   "predef": [
     "console",
-    "$"
+    "$",
+    "chrome"
   ]
 }
