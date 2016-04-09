@@ -7,15 +7,20 @@
 		"matches": ["*://*/*"],
 		"css": ["css/grd.css", "css/style.css"],
 		"js": ["lib/jquery.min.js", "js/content_script.js"],
-		"run_at": "document_end"
+		"run_at": "document_start"
 	}],
 	"version_name": "v0.1 Tiny Bat",
 	"browser_action": {
 		"default_icon": "asset/icon.png",
 		"default_popup": "view/popup.html"
 	},
+	"background": {
+		"scripts": ["js/background.js"],
+		"persistent": false
+	},
 	"permissions": [
-    "storage"
+		"tabs",
+		"storage"
   ],
 	"storage": {
 	  "name": "Redirect",
