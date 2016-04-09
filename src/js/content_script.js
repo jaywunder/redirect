@@ -29,14 +29,18 @@
           </div>
         </div>
       `
-      $('body').append($(popup))
+      // this will run when the document loads?
+      $(() => {
+        if ($('.ext-redirect-outer').length > 0) return
+        $('body').append($(popup))
 
-      let $outer = $('.ext-redirect-outer')
-      let $inner = $('.ext-redirect-inner')
+        let $outer = $('.ext-redirect-outer')
+        let $inner = $('.ext-redirect-inner')
 
-      $inner.css({
-        left: (window.innerWidth / 2 - $inner.width() / 2) + 'px',
-        top: (window.innerHeight / 2 - $inner.height() / 2) + 'px'
+        $inner.css({
+          left: (window.innerWidth / 2 - $inner.width() / 2) + 'px',
+          top: (window.innerHeight / 2 - $inner.height() / 2) + 'px'
+        })
       })
     }
   }

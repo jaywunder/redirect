@@ -39,7 +39,7 @@
       })
 
       chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-        if (tab.status === 'complete') {
+        if (tab.status === 'loading') {
           this.checkForDistraction(tab)
         }
       })
