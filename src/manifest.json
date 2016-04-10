@@ -40,10 +40,10 @@
 	      }
 	    },
 			"focus": {
-				"type": "string",
+				"type": "string"
 			},
 			"isWorking": {
-				"type": "boolean",
+				"type": "boolean"
 			},
 			"breakInfo": {
 				"type": "object",

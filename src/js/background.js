@@ -99,7 +99,7 @@
     isDistracting(url) {
       let host = url.match(/\/([a-zA-Z0-9\_\.\-\~]+)\//)[1]
       for(let i in this.config.distractions) {
-        if (host.includes(this.config.distractions[i])) return true
+        if (host.includes(this.config.distractions[i].name)) return true
       }
       return false
     }
