@@ -4,15 +4,40 @@
 (function() {
   const defaultConfig = {
     distractions: [
-      'youtube.com', 'news.ycombinator.com', 'reddit.com', 'tumblr.com',
-      'facebook.com', 'messenger.com', 'twitter.com'
+      {
+				name: 'news.ycombinator.com',
+        enabled: true
+      },
+      {
+				name: 'youtube.com',
+        enabled: true
+      },
+      {
+				name: 'reddit.com',
+        enabled: true
+      },
+      {
+				name: 'tumblr.com',
+        enabled: true
+      },
+      {
+				name: 'facebook.com',
+        enabled: true
+      },
+      {
+				name: 'messenger.com',
+        enabled: true
+      },
+      {
+				name: 'twitter.com',
+        enabled: true
+      }
     ],
-    focus: 'http://www.google.com/',
-    prevWebsite: 'chrome://newtab',
+    focus: 'http://inbox.google.com/',
+    isWorking: false,
     breakInfo: {
       breakStart: 0, // the beginning of time (kinda)
-      breakLength: 0,
-      isOnBreak: false // when they turn on the extension they start working
+      breakLength: 0
     }
   }
 

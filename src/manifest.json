@@ -27,17 +27,23 @@
 	  "properties": {
 	    "distractions": {
 	      "type": "array",
-	      "required": true,
 	      "items": {
-	        "type": "string"
+	        "type": "object",
+					"properties": {
+						"name": {
+							"type": "string"
+						},
+						"enabled": {
+							"type": "boolean"
+						}
+					}
 	      }
 	    },
 			"focus": {
 				"type": "string",
-				"required": true
 			},
-			"prevWebsite": {
-				"type": "string"
+			"isWorking": {
+				"type": "boolean",
 			},
 			"breakInfo": {
 				"type": "object",
@@ -47,9 +53,6 @@
 					},
 					"breakLength": {
 						"type": "number"
-					},
-					"isOnBreak": {
-						"type": "boolean"
 					}
 				}
 			}

@@ -2,9 +2,28 @@
 <html>
 <head>
   <meta name="Author" content=""/>
-  <link rel="stylesheet" type="text/css" href="">
+  <link rel="stylesheet" type="text/css" href="../css/grd.css">
+  <link rel="stylesheet" type="text/css" href="../css/popup.css">
 </head>
 <body>
-  <h1>TESTING HELLO IS ANYONE THERE?</h1>
+
+  <div id="wrapper">
+    <span>Redirect to: </span><input v-model="focus">
+
+
+    <ul id="example-1">
+      <li v-for="site in distractions">
+        <label>
+          <input type="checkbox" checked="{{ site.enabled }}" class="site-list" value="first_checkbox">
+          {{ site.name }}
+        </label>
+      </li>
+    </ul>
+
+  </div>
+
+  <script src="../lib/vue.js" charset="utf-8"></script>
+  <script src="../js/popup.js" charset="utf-8"></script>
+
 </body>
 </html>
