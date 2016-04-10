@@ -6,7 +6,7 @@
 	"content_scripts": [{
 		"matches": ["*://*/*"],
 		"css": ["css/grd.css", "css/style.css"],
-		"js": ["lib/jquery.min.js", "js/content_script.js"],
+		"js": ["lib/jquery.min.js", "lib/vue.js", "js/content_script.js"],
 		"run_at": "document_start"
 	}],
 	"version_name": "v0.1 Tiny Bat",

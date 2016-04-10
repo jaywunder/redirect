@@ -8,7 +8,9 @@
 <body>
 
   <div id="wrapper">
-    <img src="../asset/powerbutton_anthony_liekens.png" alt="power button" />
+    <span>isWorking: {{ isWorking }}</span>
+    <!-- TODO: change color or something of the image to show if we're working or not -->
+    <img @click="toggleWorking" src="../asset/powerbutton_anthony_liekens.png" alt="power button" />
 
     <form v-on:change="updateConfig">
       <span>Redirect to: </span><input type="text" v-model="focus">
