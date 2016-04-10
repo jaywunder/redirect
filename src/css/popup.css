@@ -1,0 +1,16 @@
+.wrapper {
+  /*width: auto;*/
+}
+
+input[type="text"] {
+
+}
+
+input[type="checkbox"] {
+  
+}
+
+ul {
+  list-style: none;
+  margin-left: -3em;
+}

@@ -8,17 +8,20 @@
 <body>
 
   <div id="wrapper">
-    <span>Redirect to: </span><input v-model="focus">
+    <img src="../asset/powerbutton_anthony_liekens.png" alt="power button" />
 
+    <form v-on:change="updateConfig">
+      <span>Redirect to: </span><input type="text" v-model="focus">
 
-    <ul id="example-1">
-      <li v-for="site in distractions">
-        <label>
-          <input type="checkbox" checked="{{ site.enabled }}" class="site-list" value="first_checkbox">
-          {{ site.name }}
-        </label>
-      </li>
-    </ul>
+      <ul id="example-1">
+        <li v-for="site in distractions">
+          <label>
+            <input type="checkbox" v-model="site.enabled" class="site-list" value="site{{ $index }}">
+            {{ site.name }}
+          </label>
+        </li>
+      </ul>
+    </form>
 
   </div>
 

@@ -48,14 +48,27 @@
 
       chrome.storage.sync.get(defaultConfig, (data) => {
         this.config = data
+
+        // setting the values we just got will make sure
+        // we have the defaultConfig saved
+        chrome.storage.sync.set(this.config)
+
+        // query without any constraints to get an array of all tabs
+        // ALSO: do this after we get the config
+        // because config and queries happen asynchronously
+        chrome.tabs.query({}, (tabs) => {
+          for (let i in tabs) {
+            this.addTabEntry(tabs[i])
+            this.checkForDistraction(tabs[i])
+          }
+        })
       })
 
-      // query without any constraints to get an array of all tabs
-      chrome.tabs.query({}, (tabs) => {
-        for (let i in tabs) {
-          this.addTabEntry(tabs[i])
-          this.checkForDistraction(tabs[i])
-        }
+      chrome.storage.onChanged.addListener((changes, areaName) => {
+        console.log(areaName, changes);
+        if (areaName === 'sync')
+          for (let key in changes)
+            this.config[key] = changes[key].newValue
       })
 
       // whenever a new tab is created we need to have metadata on it

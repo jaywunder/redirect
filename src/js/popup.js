@@ -11,44 +11,29 @@
  * <3 Jacob Wunder
  */
 
-let view = new Vue({
-  el: '#wrapper',
-  data: {
-    distractions: [
-      {
-        name: 'news.ycombinator.com',
-        enabled: true
-      },
-      {
-        name: 'youtube.com',
-        enabled: true
-      },
-      {
-        name: 'reddit.com',
-        enabled: true
-      },
-      {
-        name: 'tumblr.com',
-        enabled: true
-      },
-      {
-        name: 'facebook.com',
-        enabled: true
-      },
-      {
-        name: 'messenger.com',
-        enabled: true
-      },
-      {
-        name: 'twitter.com',
-        enabled: true
+let configQueries = ['distractions', 'focus', 'isWorking', 'breakInfo']
+
+chrome.storage.sync.get(configQueries, (data) => {
+
+  let config = data
+  chrome.storage.onChanged.addListener((changes, areaName) => {
+    console.log('heyyy... changes');
+    console.log('changes', changes);
+    if (areaName === 'sync')
+      for (let key in changes)
+        config[key] = changes[key].newValue
+  })
+
+  let view = new Vue({
+    el: '#wrapper',
+    data: config,
+    methods: {
+      updateConfig(event) {
+        // console.log('change!');
+        // console.log(this.data);
+        // console.log(this.distractions, config.distractions);
+        chrome.storage.sync.set(config)
       }
-    ],
-    focus: 'http://inbox.google.com/',
-    isWorking: false,
-    breakInfo: {
-      breakStart: 0, // the beginning of time (kinda)
-      breakLength: 0
     }
-  }
+  })
 })
