@@ -36,6 +36,7 @@
     focus: 'http://inbox.google.com/',
     isWorking: false,
     breakInfo: {
+      isOnBreak: false,
       breakStart: 0, // the beginning of time (kinda)
       breakLength: 0
     }
@@ -45,6 +46,12 @@
     constructor() {
       this.config = {};
       this.tabs = {}
+
+      // check if break is over every 5 seconds
+      // maybe this isn't often enough, it's not really a super intense
+      // function so like it doesn't matter a lot
+      // delete this comment if you think it's a good amount of time
+      let update = setInterval(() => this.checkForBreakEnd(), 5 * 1000)
 
       chrome.storage.sync.get(defaultConfig, (data) => {
         this.config = data
@@ -65,7 +72,6 @@
       })
 
       chrome.storage.onChanged.addListener((changes, areaName) => {
-        console.log(areaName, changes);
         if (areaName === 'sync')
           for (let key in changes)
             this.config[key] = changes[key].newValue
@@ -83,6 +89,17 @@
       })
     }
 
+    checkForBreakEnd() {
+      if (Date.now() > this.config.breakInfo.breakStart + this.config.breakInfo.breakLength)
+        if (this.config.breakInfo.isOnBreak)
+          // if they're on break then take them off break
+          chrome.storage.sync.set('breakInfo', {
+            isOnBreak: false,
+            breakStart: 0,
+            breakLength : 0
+          })
+    }
+
     addTabEntry(tab) {
       // add more info here if we need more tab-specific metadata
       this.tabs[tab.id] = {
@@ -91,28 +108,26 @@
     }
 
     checkForDistraction(tab) {
+      if (!this.config.isWorking) return
+      if (this.config.breakInfo.isOnBreak) return
+
       if (this.isDistracting(tab.url)) {
-        console.log(tab, 'is distracting');
         this.tabs[tab.id].distracted = true
 
-        // if (tab)
-          this.sendRedirectMessage(tab.id)
-        // else
-        //   console.log('some tab isn\'t defined');
+        this.sendRedirectMessage(tab.id)
 
       } else if (this.tabs[tab.id].distracted) {
 
-        // if (tab)
-          this.sendCreateUIMessage(tab.id)
-        // else
-        //   console.log('some tab isn\'t defined');
+        this.sendCreateUIMessage(tab.id)
       }
     }
 
     isDistracting(url) {
       let host = url.match(/\/([a-zA-Z0-9\_\.\-\~]+)\//)[1]
       for(let i in this.config.distractions) {
-        if (host.includes(this.config.distractions[i].name)) return true
+        if (host.includes(this.config.distractions[i].name) &&
+            this.config.distractions[i].enabled)
+          return true
       }
       return false
     }

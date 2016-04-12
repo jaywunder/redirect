@@ -11,6 +11,11 @@
         if (request.isDistracted) this.createUI()
       })
 
+      let configQueries = ['distractions', 'focus', 'isWorking', 'breakInfo']
+      chrome.storage.sync.get(configQueries, (data) => {
+        this.config = data
+      })
+
       chrome.storage.onChanged.addListener((changes, areaName) => {
         // this is in case something else changes the state whil we're trying to change state
         if (areaName === 'sync')
@@ -64,7 +69,11 @@
         data: config,
         methods: {
           takeBreak(time) {
-            console.log(`taking a ${time} minute break`);
+            chrome.storage.sync.set('breakInfo', {
+              isOnBreak: true,
+              breakStart: Date.now(),
+              breakLength : time * 60 * 1000
+            })
           },
           backToWork() {
             $('#ext-redirect-outer').remove()

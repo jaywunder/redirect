@@ -48,6 +48,9 @@
 			"breakInfo": {
 				"type": "object",
 				"properties": {
+					"isOnBreak": {
+						"type": "boolean"
+					},
 					"breakStart": {
 						"type": "number"
 					},
