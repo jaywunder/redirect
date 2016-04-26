@@ -6,6 +6,7 @@
   "predef": [
     "console",
     "$",
-    "chrome"
+    "chrome",
+    "Vue"
   ]
 }

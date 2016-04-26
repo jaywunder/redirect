@@ -1,4 +1,4 @@
-.ext-redirect-outer {
+#ext-redirect-outer {
   z-index: 99999999;
   position: fixed;
   top: 0px;
@@ -8,7 +8,7 @@
   background: rgba(0, 0, 0, 0.7);
 }
 
-.ext-redirect-inner {
+#ext-redirect-inner {
   color: white;
   z-index: 99999999;
   position: fixed;

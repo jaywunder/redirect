@@ -4,15 +4,41 @@
 (function() {
   const defaultConfig = {
     distractions: [
-      'youtube.com', 'news.ycombinator.com', 'reddit.com', 'tumblr.com',
-      'facebook.com', 'messenger.com', 'twitter.com'
+      {
+				name: 'news.ycombinator.com',
+        enabled: true
+      },
+      {
+				name: 'youtube.com',
+        enabled: true
+      },
+      {
+				name: 'reddit.com',
+        enabled: true
+      },
+      {
+				name: 'tumblr.com',
+        enabled: true
+      },
+      {
+				name: 'facebook.com',
+        enabled: true
+      },
+      {
+				name: 'messenger.com',
+        enabled: true
+      },
+      {
+				name: 'twitter.com',
+        enabled: true
+      }
     ],
-    focus: 'http://www.google.com/',
-    prevWebsite: 'chrome://newtab',
+    focus: 'http://inbox.google.com/',
+    isWorking: false,
     breakInfo: {
+      isOnBreak: false,
       breakStart: 0, // the beginning of time (kinda)
-      breakLength: 0,
-      isOnBreak: false // when they turn on the extension they start working
+      breakLength: 0
     }
   }
 
@@ -21,16 +47,34 @@
       this.config = {};
       this.tabs = {}
 
+      // check if break is over every 5 seconds
+      // maybe this isn't often enough, it's not really a super intense
+      // function so like it doesn't matter a lot
+      // delete this comment if you think it's a good amount of time
+      let update = setInterval(() => this.checkForBreakEnd(), 5 * 1000)
+
       chrome.storage.sync.get(defaultConfig, (data) => {
         this.config = data
+
+        // setting the values we just got will make sure
+        // we have the defaultConfig saved
+        chrome.storage.sync.set(this.config)
+
+        // query without any constraints to get an array of all tabs
+        // ALSO: do this after we get the config
+        // because config and queries happen asynchronously
+        chrome.tabs.query({}, (tabs) => {
+          for (let i in tabs) {
+            this.addTabEntry(tabs[i])
+            this.checkForDistraction(tabs[i])
+          }
+        })
       })
 
-      // query without any constraints to get an array of all tabs
-      chrome.tabs.query({}, (tabs) => {
-        for (let i in tabs) {
-          this.addTabEntry(tabs[i])
-          this.checkForDistraction(tabs[i])
-        }
+      chrome.storage.onChanged.addListener((changes, areaName) => {
+        if (areaName === 'sync')
+          for (let key in changes)
+            this.config[key] = changes[key].newValue
       })
 
       // whenever a new tab is created we need to have metadata on it
@@ -45,6 +89,17 @@
       })
     }
 
+    checkForBreakEnd() {
+      if (Date.now() > this.config.breakInfo.breakStart + this.config.breakInfo.breakLength)
+        if (this.config.breakInfo.isOnBreak)
+          // if they're on break then take them off break
+          chrome.storage.sync.set('breakInfo', {
+            isOnBreak: false,
+            breakStart: 0,
+            breakLength : 0
+          })
+    }
+
     addTabEntry(tab) {
       // add more info here if we need more tab-specific metadata
       this.tabs[tab.id] = {
@@ -53,28 +108,26 @@
     }
 
     checkForDistraction(tab) {
+      if (!this.config.isWorking) return
+      if (this.config.breakInfo.isOnBreak) return
+
       if (this.isDistracting(tab.url)) {
-        console.log(tab, 'is distracting');
         this.tabs[tab.id].distracted = true
 
-        // if (tab)
-          this.sendRedirectMessage(tab.id)
-        // else
-        //   console.log('some tab isn\'t defined');
+        this.sendRedirectMessage(tab.id)
 
       } else if (this.tabs[tab.id].distracted) {
 
-        // if (tab)
-          this.sendCreateUIMessage(tab.id)
-        // else
-        //   console.log('some tab isn\'t defined');
+        this.sendCreateUIMessage(tab.id)
       }
     }
 
     isDistracting(url) {
       let host = url.match(/\/([a-zA-Z0-9\_\.\-\~]+)\//)[1]
       for(let i in this.config.distractions) {
-        if (host.includes(this.config.distractions[i])) return true
+        if (host.includes(this.config.distractions[i].name) &&
+            this.config.distractions[i].enabled)
+          return true
       }
       return false
     }

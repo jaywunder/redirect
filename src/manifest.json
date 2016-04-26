@@ -6,7 +6,7 @@
 	"content_scripts": [{
 		"matches": ["*://*/*"],
 		"css": ["css/grd.css", "css/style.css"],
-		"js": ["lib/jquery.min.js", "js/content_script.js"],
+		"js": ["lib/jquery.min.js", "lib/vue.js", "js/content_script.js"],
 		"run_at": "document_start"
 	}],
 	"version_name": "v0.1 Tiny Bat",
@@ -27,29 +27,35 @@
 	  "properties": {
 	    "distractions": {
 	      "type": "array",
-	      "required": true,
 	      "items": {
-	        "type": "string"
+	        "type": "object",
+					"properties": {
+						"name": {
+							"type": "string"
+						},
+						"enabled": {
+							"type": "boolean"
+						}
+					}
 	      }
 	    },
 			"focus": {
-				"type": "string",
-				"required": true
-			},
-			"prevWebsite": {
 				"type": "string"
+			},
+			"isWorking": {
+				"type": "boolean"
 			},
 			"breakInfo": {
 				"type": "object",
 				"properties": {
+					"isOnBreak": {
+						"type": "boolean"
+					},
 					"breakStart": {
 						"type": "number"
 					},
 					"breakLength": {
 						"type": "number"
-					},
-					"isOnBreak": {
-						"type": "boolean"
 					}
 				}
 			}

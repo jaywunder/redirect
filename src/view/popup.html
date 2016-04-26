@@ -2,9 +2,33 @@
 <html>
 <head>
   <meta name="Author" content=""/>
-  <link rel="stylesheet" type="text/css" href="">
+  <link rel="stylesheet" type="text/css" href="../css/grd.css">
+  <link rel="stylesheet" type="text/css" href="../css/popup.css">
 </head>
 <body>
-  <h1>TESTING HELLO IS ANYONE THERE?</h1>
+
+  <div id="wrapper">
+    <span>isWorking: {{ isWorking }}</span>
+    <!-- TODO: change color or something of the image to show if we're working or not -->
+    <img @click="toggleWorking" src="../asset/powerbutton_anthony_liekens.png" alt="power button" />
+
+    <form v-on:change="updateConfig">
+      <span>Redirect to: </span><input type="text" v-model="focus">
+
+      <ul id="example-1">
+        <li v-for="site in distractions">
+          <label>
+            <input type="checkbox" v-model="site.enabled" class="site-list" value="site{{ $index }}">
+            {{ site.name }}
+          </label>
+        </li>
+      </ul>
+    </form>
+
+  </div>
+
+  <script src="../lib/vue.js" charset="utf-8"></script>
+  <script src="../js/popup.js" charset="utf-8"></script>
+
 </body>
 </html>
