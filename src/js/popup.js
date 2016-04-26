@@ -11,7 +11,7 @@
  * <3 Jacob Wunder
  */
 
-let configQueries = ['distractions', 'focus', 'isWorking', 'breakInfo']
+let configQueries = ['distractions', 'focus', 'isWorking', 'breakInfo', 'siteIcons']
 
 chrome.storage.sync.get(configQueries, (data) => {
 
@@ -38,4 +38,5 @@ chrome.storage.sync.get(configQueries, (data) => {
       }
     }
   })
+
 })

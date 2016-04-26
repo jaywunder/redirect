@@ -11,7 +11,7 @@
         if (request.isDistracted) this.createUI()
       })
 
-      let configQueries = ['distractions', 'focus', 'isWorking', 'breakInfo']
+      let configQueries = ['distractions', 'focus', 'isWorking', 'breakInfo', 'siteIcons']
       chrome.storage.sync.get(configQueries, (data) => {
         this.config = data
       })
