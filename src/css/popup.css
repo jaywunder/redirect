@@ -1,3 +1,11 @@
+body, html {
+	margin: 0;
+	padding: 0;
+	font-family: verdana, sans-serif;
+	min-width: 500px;
+	min-height: 500px;
+}
+
 .wrapper {
   /*width: auto;*/
 }
@@ -13,4 +21,14 @@ input[type="checkbox"] {
 ul {
   list-style: none;
   margin-left: -3em;
+}
+
+#powerButton {
+	display: block;
+	font-size: 200px;
+	text-align: center;
+	color: red;
+}
+#powerButton.on {
+	color: green;
 }

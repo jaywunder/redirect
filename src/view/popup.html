@@ -4,13 +4,15 @@
   <meta name="Author" content=""/>
   <link rel="stylesheet" type="text/css" href="../css/grd.css">
   <link rel="stylesheet" type="text/css" href="../css/popup.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 </head>
 <body>
 
   <div id="wrapper">
     <span>isWorking: {{ isWorking }}</span>
     <!-- TODO: change color or something of the image to show if we're working or not -->
-    <img @click="toggleWorking" src="../asset/powerbutton_anthony_liekens.png" alt="power button" />
+	<!--<img @click="toggleWorking" src="../asset/powerbutton_anthony_liekens.png" alt="power button" />-->
+	<i id="powerButton" v-bind:class="{'fa':true,'fa-power-off':true,'on':isWorking}" @click="toggleWorking"></i>
 
     <form v-on:change="updateConfig">
       <span>Redirect to: </span><input type="text" v-model="focus">
