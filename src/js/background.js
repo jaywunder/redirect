@@ -39,12 +39,21 @@
       isOnBreak: false,
       breakStart: 0, // the beginning of time (kinda)
       breakLength: 0
-    }
+    },
+	siteIcons: {
+		"news.ycombinator.com": "y-combinator",
+		"youtube.com": "youtube-play",
+		"reddit.com": "reddit",
+		"tumblr.com": "tumblr",
+		"facebook.com": "facebook",
+		"messenger.com": "comments-o",
+		"twitter.com": "twitter"
+	}
   }
 
   class RedirectBackgroundProcess {
     constructor() {
-      this.config = {};
+      this.config = {}
       this.tabs = {}
 
       // check if break is over every 5 seconds
@@ -52,13 +61,13 @@
       // function so like it doesn't matter a lot
       // delete this comment if you think it's a good amount of time
       let update = setInterval(() => this.checkForBreakEnd(), 5 * 1000)
-
+	
       chrome.storage.sync.get(defaultConfig, (data) => {
-        this.config = data
+		this.config = data
 
         // setting the values we just got will make sure
         // we have the defaultConfig saved
-        chrome.storage.sync.set(this.config)
+        chrome.storage.sync.set(this.config);
 
         // query without any constraints to get an array of all tabs
         // ALSO: do this after we get the config
