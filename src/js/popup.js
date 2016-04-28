@@ -39,6 +39,13 @@ chrome.storage.sync.get(configQueries, (data) => {
 	  toggleSite(siteIndex) {
 	  	this.distractions[siteIndex].enabled = !this.distractions[siteIndex].enabled
 		this.updateConfig()
+	  },
+	  addSite(event) {
+		if(event.which != 13)
+		  return
+		var value = document.querySelector("#newSiteInput").value
+		this.distractions.push({name: value, enabled: true})
+		this.updateConfig()
 	  }
     }
   })

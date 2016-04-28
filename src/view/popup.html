@@ -28,6 +28,9 @@
 		  {{ site.name }}
 		  <span v-if="siteIcons[site.name]"><i v-bind:class='["faSiteIcon","fa","fa-"+siteIcons[site.name]]'></i></span>
 		</div>
+		<div class="siteList" id="newSite" title="Block another site here">
+		  <input type="text" id="newSiteInput" v-on:keyup="addSite" />
+		</div>
 	  </div>
     </form>
 
