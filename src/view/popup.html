@@ -15,10 +15,7 @@
 	</div>
 
     <form v-on:change="updateConfig">
-	  <h3>Redirect Address</h3>
-	  <input type="text" v-model="focus">
-		
-	  <h3>Blocked Sites</h3>
+	  <input type="text" id="redirectAddress" placeholder="Redirect Address" v-model="focus">
 	  <div id="siteContainer" class="clearfix">
 		<div v-for="site in distractions" @click="toggleSite($index)" v-bind:class="{'disabled':!site.enabled,'siteList':true}" title="{{ site.enabled ? 'Unblock site' : 'Block site' }}">
 		  {{ site.name }}
