@@ -72,6 +72,22 @@ h3 {
 	opacity: 0.5;
 	background-color: rgba(0, 0, 0, 0.5);
 }
+.closeButton {	
+	position: absolute !important;
+	right: 20px;
+	top: 20px;
+	width: 20px !important;
+	height: 20px !important;
+	z-index: 2;
+}
+.closeButtonCircle {
+	color: #ff8080;
+	transition: all 0.5s;
+	opacity: 0.25;
+}
+.closeButton:hover > .closeButtonCircle {
+	opacity: 1;
+}
 .faSiteIcon {
 	position: absolute;
 	left: 10px;
@@ -79,4 +95,12 @@ h3 {
 	font-size: 40px !important;
 	text-align: left;
 	opacity: 0.25;
+}
+#newSiteInput {
+	font-size: inherit;
+	font-family: inherit;
+	border: none;
+	background-color: transparent;
+	outline: none;
+	text-align: center;
 }
