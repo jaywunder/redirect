@@ -35,7 +35,11 @@ chrome.storage.sync.get(configQueries, (data) => {
       toggleWorking() {
         this.isWorking = !this.isWorking
         this.updateConfig()
-      }
+      },
+	  toggleSite(siteIndex) {
+	  	this.distractions[siteIndex].enabled = !this.distractions[siteIndex].enabled
+		this.updateConfig()
+	  }
     }
   })
 
