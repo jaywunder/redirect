@@ -9,19 +9,22 @@
 <body>
 
   <div id="wrapper">
-	<i id="powerButton" v-bind:class="{'fa':true,'fa-power-off':true,'on':isWorking}" @click="toggleWorking" title="{{ isWorking ? 'Turn off' : 'Turn on' }}"></i>
+	<div id="powerButton" @click="toggleWorking" v-bind:class="{'on':isWorking}">
+	  Redirect extension is {{ isWorking ? "enabled" : "disabled" }}.
+	  <i v-bind:class="{'fa':true,'fa-power-off':true}" title="{{ isWorking ? 'Turn off' : 'Turn on' }}"></i>
+	</div>
 
     <form v-on:change="updateConfig">
-      <span>Redirect to: </span><input type="text" v-model="focus">
-
-      <ul id="example-1">
-        <li v-for="site in distractions">
-          <label>
-            <input type="checkbox" v-model="site.enabled" class="site-list" value="site{{ $index }}">
-			{{ site.name }} <span v-if="siteIcons[site.name]"><i v-bind:class='["fa","fa-"+siteIcons[site.name]]'></i></span>
-          </label>
-        </li>
-      </ul>
+	  <h3>Redirect Address</h3>
+	  <input type="text" v-model="focus">
+		
+	  <h3>Blocked Sites</h3>
+	  <div id="siteContainer" class="clearfix">
+		<div v-for="site in distractions" @click="toggleSite($index)" v-bind:class="{'disabled':!site.enabled,'siteList':true}" title="{{ site.enabled ? 'Unblock site' : 'Block site' }}">
+		  {{ site.name }}
+		  <span v-if="siteIcons[site.name]"><i v-bind:class='["faSiteIcon","fa","fa-"+siteIcons[site.name]]'></i></span>
+		</div>
+	  </div>
     </form>
 
   </div>
