@@ -25,6 +25,9 @@
     }
 
     redirect(focus) {
+      if (!/^https?:\/\//i.test(focus)) {
+        focus = 'https://' + focus;
+      }
       location.href = focus
     }
 
