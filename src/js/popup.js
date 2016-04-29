@@ -45,6 +45,8 @@ chrome.storage.sync.get(configQueries, (data) => {
 		  return
 		var value = document.querySelector("#newSiteInput").value
 		document.querySelector("#newSiteInput").value = ""
+		if(this.distractions.filter(function(item) { return item.name == value }).length >= 1)
+			return;
 		this.distractions.push({name: value, enabled: true})
 		this.updateConfig()
 	  },
