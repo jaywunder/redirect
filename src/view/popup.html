@@ -26,7 +26,16 @@
 	  <div id="siteContainer" class="clearfix">
 		<div v-for="site in distractions" @click="toggleSite($index)" v-bind:class="{'disabled':!site.enabled,'siteList':true}" title="Click to {{ site.enabled ? 'unblock site' : 'block site' }}">
 		  {{ site.name }}
-		  <span v-if="siteIcons[site.name]"><i v-bind:class='["faSiteIcon","fa","fa-"+siteIcons[site.name]]'></i></span>
+		  <span v-if="siteIcons[site.name]">
+			<i v-bind:class='["faSiteIcon","fa","fa-"+siteIcons[site.name]]'></i>
+		  </span>
+		  <span class="fa-stack closeButton" @click="removeSite(site.name)" title="Remove site blocking">
+			<i class="fa fa-circle fa-stack-2x closeButtonCircle"></i>
+			<i class="fa fa-times fa-stack-1x fa-inverse"></i>
+		  </span>
+		</div>
+		<div class="siteList" id="newSite" title="Block another site here">
+		  <input type="text" id="newSiteInput" v-on:keyup="addSite" placeholder="Block another site..." />
 		</div>
 	  </div>
     </form>
