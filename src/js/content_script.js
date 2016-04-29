@@ -49,20 +49,18 @@
       `
 
       // this will run when the document loads
-      $( window ).load(() => {
-        if ($('#ext-redirect-outer').length > 0) return
-        $('body').append($(popup))
+      if ($('#ext-redirect-outer').length > 0) return
+      $('body').append($(popup))
 
-        let $outer = $('#ext-redirect-outer')
-        let $inner = $('#ext-redirect-inner')
+      let $outer = $('#ext-redirect-outer')
+      let $inner = $('#ext-redirect-inner')
 
-        $inner.css({
-          left: (window.innerWidth / 2 - $inner.width() / 2) + 'px',
-          top: (window.innerHeight / 2 - $inner.height() / 2) + 'px'
-        })
-
-        this.createVue()
+      $inner.css({
+        left: (window.innerWidth / 2 - $inner.width() / 2) + 'px',
+        top: (window.innerHeight / 2 - $inner.height() / 2) + 'px'
       })
+
+      this.createVue()
     }
 
     createVue() {
