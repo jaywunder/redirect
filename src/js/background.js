@@ -40,14 +40,43 @@
       breakStart: 0, // the beginning of time (kinda)
       breakLength: 0
     },
+	// for siteIcons, please include icon without border
 	siteIcons: {
-		"ycombinator": "y-combinator",
-		"youtube": "youtube-play",
-		"reddit": "reddit",
-		"tumblr": "tumblr",
+		"amazon": "amazon",
+		"delicious": "delicious",
+		"deviantart": "deviantart",
+		"digg": "digg",
+		"dribble": "dribble",
 		"facebook": "facebook",
+		"flickr": "flickr",
+		"forumbee": "forumbee",
+		"foursquare": "foursquare",
+		"getpocket": "getpocket",
+		"plus.google": "google-plus",
+		"gratipay": "gratiplay",
+		"instagram": "instagram",
+		"last.fm": "lastfm",
+		"medium": "medium",
 		"messenger": "comments-o",
-		"twitter": "twitter"
+		"pinterest": "pinterest",
+		"reddit": "reddit-alien",
+		"skype": "skype",
+		"slack": "slack",
+		"snapchat": "snapchat-ghost",
+		"steampowered": "steam",
+		"stumbleupon": "stumbleupon",
+		"tumblr": "tumblr",
+		"twitter": "twitter",
+		"twitch": "twitch",
+		"vimeo": "vimeo",
+		"vine": "vine",
+		"wechat": "wechat",
+		"whatsapp": "whatsapp",
+		"wordpress": "wordpress",
+		"xing": "xing",
+		"yahoo": "yahoo",
+		"ycombinator": "hacker-news",
+		"youtube": "youtube-play"
 	}
   }
 
