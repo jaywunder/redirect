@@ -41,13 +41,13 @@
       breakLength: 0
     },
 	siteIcons: {
-		"news.ycombinator.com": "y-combinator",
-		"youtube.com": "youtube-play",
-		"reddit.com": "reddit",
-		"tumblr.com": "tumblr",
-		"facebook.com": "facebook",
-		"messenger.com": "comments-o",
-		"twitter.com": "twitter"
+		"ycombinator": "y-combinator",
+		"youtube": "youtube-play",
+		"reddit": "reddit",
+		"tumblr": "tumblr",
+		"facebook": "facebook",
+		"messenger": "comments-o",
+		"twitter": "twitter"
 	}
   }
 

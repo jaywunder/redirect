@@ -46,15 +46,22 @@ chrome.storage.sync.get(configQueries, (data) => {
 		var value = document.querySelector("#newSiteInput").value
 		document.querySelector("#newSiteInput").value = ""
 		if(this.distractions.filter(function(item) { return item.name == value }).length >= 1)
-			return;
+		  return;
 		this.distractions.push({name: value, enabled: true})
 		this.updateConfig()
 	  },
 	  removeSite(siteName) {
 	  	this.distractions = this.distractions.filter(function(item) {
-			return item.name != siteName;
+		  return item.name != siteName;
 		});
 		this.updateConfig()
+	  },
+	  findIcon(siteName) {
+		for(var url in this.siteIcons) {
+		  if(siteName.indexOf(url) >= 0)
+		    return this.siteIcons[url]
+		}
+		return false
 	  }
     }
   })
