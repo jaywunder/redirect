@@ -90,7 +90,7 @@
       // function so like it doesn't matter a lot
       // delete this comment if you think it's a good amount of time
       let update = setInterval(() => this.checkForBreakEnd(), 5 * 1000)
-	
+
       chrome.storage.sync.get(defaultConfig, (data) => {
 		this.config = data
 
