@@ -37,21 +37,24 @@
       var popup = `
         <div id="ext-redirect">
           <button id="ext-redirect-backToWork" @click="backToWork" type="button">Back to Work</button>
-          <h1 id="ext-redirect-title">Redirect extension says, "Don't get distracted!"</h1>
-          <div id="ext-redirect-takeBreakContainer">
-            <button class="ext-redirect-takeBreak" @click="takeBreak(5)" type="button">5min. break</button>
-            <button class="ext-redirect-takeBreak" @click="takeBreak(15)" type="button">15min. break</button>
-            <button class="ext-redirect-takeBreak" @click="takeBreak(30)" type="button">30min. break</button>
-            <button class="ext-redirect-takeBreak" @click="takeBreak(60)" type="button">60min. break</button>
+          <div id="ext-redirect-right">
+            <h1 id="ext-redirect-title">Redirect extension says, "Don't get distracted!"</h1>
+            <div id="ext-redirect-takeBreakContainer">
+              <button class="ext-redirect-takeBreak" @click="takeBreak(5)" type="button">5min. break</button>
+              <button class="ext-redirect-takeBreak" @click="takeBreak(15)" type="button">15min. break</button>
+              <button class="ext-redirect-takeBreak" @click="takeBreak(30)" type="button">30min. break</button>
+              <button class="ext-redirect-takeBreak" @click="takeBreak(60)" type="button">60min. break</button>
+            </div>
           </div>
         </div>
       `
-
+      var thisRef = this;
       // this will run when the document loads
-      if ($('#ext-redirect').length > 0) return
-      $('body').append($(popup))
-
-      this.createVue()
+      $(window).load(function() {
+        if ($('#ext-redirect').length > 0) return
+        $('body').append(popup)
+        thisRef.createVue()
+      });
     }
 
     createVue() {
