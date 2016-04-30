@@ -1,24 +1,44 @@
-#ext-redirect-outer {
+#ext-redirect {
   z-index: 99999999;
   position: fixed;
   top: 0px;
   left: 0px;
-  min-width: 100%;
-  min-height: 100%;
-  background: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: column;
 }
-
-#ext-redirect-inner {
-  color: white;
-  z-index: 99999999;
-  position: fixed;
-  min-width: 50%;
-  /*min-height: 30%;*/
-  max-width: 50%;
-  /*max-height: 30%;*/
-  width: auto;
-  height: auto;
-  background: rgba(0, 0, 0, 0.9);
-  border-radius: .7em;
-  padding: 1em;
+#ext-redirect-title {
+  flex-basis: auto;
+  flex-shrink: 1;
+  text-align: center;
+  font-size: 25px;
+  margin: 0;
+  padding: 25px;
+  border: none;
+}
+#ext-redirect-takeBreakContainer, #ext-redirect-backToWork {
+  flex-basis: auto;
+  flex-grow: 3;
+}
+#ext-redirect-backToWork {
+  font-size: 50px;
+}
+#ext-redirect-takeBreakContainer {
+  display: flex;
+  flex-direction: row;
+}
+#ext-redirect-backToWork, .ext-redirect-takeBreak {
+  border: none;
+  transition: all .5s;
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+#ext-redirect-backToWork:hover, .ext-redirect-takeBreak:hover {
+  background-color: transparent;
+}
+.ext-redirect-takeBreak {
+  flex-grow: 1;
+  font-size: 25px;
 }
