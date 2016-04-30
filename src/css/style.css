@@ -4,7 +4,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 150px;
+  height: 68px;
   background: rgba(255, 255, 255, 0.9);
   display: flex;
   flex-direction: row;
@@ -14,13 +14,13 @@
   flex-shrink: 1;
   flex-basis: auto;
   text-align: center;
-  font-size: 25px;
+  font-size: 18px;
   margin: 0;
-  padding: 25px;
+  padding: 8px;
   border: none;
 }
 #ext-redirect-backToWork {
-  font-size: 50px;
+  font-size: 36px;
   flex-grow: 1;
 }
 #ext-redirect-right {
@@ -44,6 +44,6 @@
 }
 .ext-redirect-takeBreak {
   flex-grow: 1;
-  font-size: 25px;
-  padding: 10px;
+  font-size: 16px;
+  padding: 8px;
 }
