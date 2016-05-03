@@ -34,7 +34,7 @@
     createUI() {
       // "ext-redirect-" means "extension redirect"
       // I don't want any class name conlicts with other websites
-      var popup = `
+      let popup = `
         <div id="ext-redirect">
           <button id="ext-redirect-backToWork" @click="backToWork" type="button">Back to Work</button>
           <div id="ext-redirect-right">
@@ -48,12 +48,12 @@
           </div>
         </div>
       `
-      var thisRef = this;
       // this will run when the document loads
-      $(window).load(function() {
+      $(window).load(() => {
         if ($('#ext-redirect').length > 0) return
-        $('body').append(popup)
-        thisRef.createVue()
+        $('body').before(popup)
+        $('body').css('position', 'relative');
+        this.createVue()
       });
     }
 
