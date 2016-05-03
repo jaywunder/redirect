@@ -38,7 +38,6 @@
         <div id="ext-redirect">
           <button id="ext-redirect-backToWork" @click="backToWork" type="button">Back to Work</button>
           <div id="ext-redirect-right">
-            <h1 id="ext-redirect-title">Redirect extension says, "Don't get distracted!"</h1>
             <div id="ext-redirect-takeBreakContainer">
               <button class="ext-redirect-takeBreak" @click="takeBreak(5)" type="button">5min. break</button>
               <button class="ext-redirect-takeBreak" @click="takeBreak(15)" type="button">15min. break</button>
