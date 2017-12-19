@@ -1,22 +1,22 @@
-window.onload = async function() {
-  // const config = await browser.storage.sync.get()
-  // console.log('config', config);
-  new Vue({
-    el: '#vue',
-    data() { return {
-      msg: 'WOWWEEEE HEYYOO',
-      // config,
-    }},
-    created() {
-      console.log('heyy');
-      console.log(this.$el);
-    },
-    mounted() {
-      console.log('heyy');
-      console.log(this.$el);
-    },
-    methods: {
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-    },
-  })
+window.onload = function() {
+  // const config = await browser.storage.sync.get()
+
+  ReactDOM.render(
+    <span>hey there!</span>,
+    document.getElementById('root')
+  )
+
+  // console.log('<span>hey</span>', <span>hey there!</span>)
+  
+  // ReactDOM.render(
+  //   <Provider store={ store }>
+  //     <StateManager>
+  //       <App />
+  //     </StateManager>
+  //   </Provider>,
+  //   document.getElementById('root')
+  // )
 }
