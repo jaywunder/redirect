@@ -1,26 +1,33 @@
 {
 	"manifest_version": 2,
 	"name": "Redirect",
-	"version": "0.1",
+	"version": "2.1",
 	"description": "Helps you focus on homework by redirecting you from distracting websites",
 	"content_scripts": [{
 		"matches": ["*://*/*"],
-		"css": ["css/grd.css", "css/style.css"],
-		"js": ["lib/jquery.min.js", "lib/vue.js", "js/content_script.js"],
+		"css": [],
+		"js": [
+			"lib/browser-polyfill.min.js",
+			"content_script.js"
+		],
 		"run_at": "document_start"
 	}],
 	"version_name": "v0.1 Tiny Bat",
 	"browser_action": {
-		"default_icon": "asset/icon.png",
-		"default_popup": "view/popup.html"
+		"default_icon": "assets/icon.png",
+		"default_popup": "popup/index.html"
 	},
 	"background": {
-		"scripts": ["js/background.js"],
+		"scripts": [
+			"lib/browser-polyfill.min.js",
+			"background.js"
+		],
 		"persistent": false
 	},
 	"permissions": [
 		"tabs",
-		"storage"
+		"storage",
+		"webNavigation"
   ],
 	"storage": {
 	  "name": "Redirect",

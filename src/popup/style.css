@@ -1,0 +1,78 @@
+:focus {
+  outline: none;
+}
+
+:root {
+  font-family: sans-serif;
+  margin: 0;
+}
+
+button {
+  padding: .5em;
+  border-radius: .25em;
+}
+
+.wrapper {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+.wrapper.powered-off {
+  grid-template-areas:
+    "powerbutton"
+    "status";
+}
+
+.wrapper.powered-on {
+  grid-template-areas:
+    "powerbutton"
+    "status"
+    "takebreak"
+    "breakbuttons"
+    "minutes";
+}
+
+.wrapper.on-break {
+  grid-template-areas:
+    "clock"
+    "status";
+}
+
+.status {
+  grid-area: status;
+  text-align: center;
+}
+
+.powerbutton {
+  grid-area: powerbutton;
+}
+
+.breakbuttons {
+  grid-area: breakbuttons;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+  text-align: center;
+  align-items: center;
+
+}
+
+.breakbuttons button {
+  width: 3em;
+  font-size: 1.5em;
+  margin-left: .5em;
+  margin-right: .5em;
+}
+
+/* SVG CLOCK */
+
+.clock circle {
+  /* stroke-dashoffset: 367.566341; /* (2pi * r) * ((100 - %)/ 100) */
+  transition: stroke-dashoffset .1s linear;
+  stroke: #666;
+  stroke-width: 1em;
+}
+.clock .bar {
+  stroke: #FF9F1E;
+}

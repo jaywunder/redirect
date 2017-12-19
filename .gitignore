@@ -2,3 +2,6 @@
 *.pem
 *~
 .*~
+
+node_modules
+src.old

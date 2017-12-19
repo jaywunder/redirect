@@ -1,0 +1,29 @@
+{
+  "name": "redirect",
+  "version": "0.2.0",
+  "description": "redirect chrome extension",
+  "main": "none",
+  "scripts": {
+    "test": "echo nope"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaywunder/redirect.git"
+  },
+  "keywords": [
+    "chrome",
+    "extension"
+  ],
+  "author": "Jacob Wunder",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jaywunder/redirect/issues"
+  },
+  "homepage": "https://github.com/jaywunder/redirect#readme",
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.35",
+    "@babel/preset-env": "^7.0.0-beta.35",
+    "babel-loader": "^8.0.0-beta.0",
+    "webpack": "^3.10.0"
+  }
+}
