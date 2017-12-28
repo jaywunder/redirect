@@ -13,11 +13,11 @@ graph LR
 	disabled
 	enabled
 	break
-	
+
 	disabled -- "power" --> enabled
-	
+
 	enabled -- "distraction" --> break
-	
+
 	break -- "power" --> disabled
 	enabled -- "power" --> disabled
 
@@ -38,23 +38,6 @@ graph LR
 - Break
   - How long is left in the break
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+options:
+	- blocked websites
+	- focus website

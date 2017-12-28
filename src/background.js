@@ -35,9 +35,8 @@ const defaultConfig = {
   breakInfo: {
     isOnBreak: false,
     breakStart: 0,
-    breakLength: 0
+    breakEnd: 0
   },
-  // for siteIcons, please include icon without border
   siteIcons: {
     'amazon': 'amazon',
     'delicious': 'delicious',
@@ -79,54 +78,77 @@ const defaultConfig = {
 
 class RedirectBackgroundProcess {
   constructor () {
-    this.config = {}
+    this.sync = {}
     this.tabs = {}
 
     let update = setInterval(() => this.checkForBreakEnd(), 1 * 1000)
 
     chrome.storage.sync.get(defaultConfig, data => {
-      this.config = data
-      chrome.storage.sync.set(this.config)
+      this.sync = data
     })
 
     browser.storage.onChanged.addListener((changes, area) => {
       if (area === 'sync') {
-        this.config = Object.assign(changes, this.config)
+        browser.storage.sync.get().then(sync => {
+          this.sync = sync
+
+          if (this.sync.isWorking) {
+            chrome.browserAction.setBadgeBackgroundColor({ color: [190, 190, 190, 230 ]})
+            chrome.browserAction.setBadgeText({ text: 'on' })
+            // TODO: more colorful icon
+            // chrome.browserAction.setIcon({ path: icon })
+          } else {
+            chrome.browserAction.setBadgeText({ text: '' })
+            // TODO: more colorful icon
+            // chrome.browserAction.setIcon({ path: icon })
+          }
+        })
       }
     })
 
     browser.webNavigation.onBeforeNavigate.addListener(details => {
-      if (this.isDistracting(details.url)) {
+      // console.log('details', details)
+      if (
+        this.isDistracting(details.url) &&
+        this.sync.isWorking &&
+        !this.sync.breakInfo.isOnBreak &&
+        // it's either this or the next line to stop iframes from being redirected
+        details.parentFrameId === -1
+        // details.frameId === 0
+      ) {
         this.redirect(details.tabId)
       }
     })
   }
 
+  redirect(tabId) {
+    const url = this.sync.focusNewTab
+      ? 'chrome://newtab'
+      : 'https://' + this.sync.focus
+
+    browser.tabs.update(tabId, { url })
+  }
+
   checkForBreakEnd() {
-    if (Date.now() > this.config.breakInfo.breakStart + this.config.breakInfo.breakLength)
-      if (this.config.breakInfo.isOnBreak)
-        // if they're on break then take them off break
-        browser.storage.sync.set('breakInfo', {
+    if (Date.now() > this.sync.breakInfo.breakEnd && this.sync.breakInfo.isOnBreak) {
+      browser.storage.sync.set({
+        breakInfo: {
           isOnBreak: false,
           breakStart: 0,
-          breakLength : 0
-        })
+          breakEnd: 0
+        }
+      })
+    }
   }
 
   isDistracting(url) {
     let host = url.match(/\/([a-zA-Z0-9\_\.\-\~]+)\//)[1]
-    for(let i in this.config.distractions) {
-      if (host.includes(this.config.distractions[i].name) &&
-          this.config.distractions[i].enabled)
+    for(let i in this.sync.distractions) {
+      if (host.includes(this.sync.distractions[i].name) &&
+          this.sync.distractions[i].enabled)
         return true
     }
     return false
-  }
-
-  redirect(tabId) {
-    browser.tabs.update(tabId, {
-      url: 'https://inbox.google.com'
-    })
   }
 }
 

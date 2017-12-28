@@ -12,11 +12,12 @@
 		],
 		"run_at": "document_start"
 	}],
-	"version_name": "v0.1 Tiny Bat",
+	"version_name": "v0.2 Fun Bear",
 	"browser_action": {
 		"default_icon": "assets/icon.png",
 		"default_popup": "popup/index.html"
 	},
+	"options_page": "options/index.html",
 	"background": {
 		"scripts": [
 			"lib/browser-polyfill.min.js",
@@ -49,6 +50,9 @@
 			"focus": {
 				"type": "string"
 			},
+			"focusNewTab": {
+				"type": "boolean"
+			},
 			"isWorking": {
 				"type": "boolean"
 			},
@@ -61,7 +65,7 @@
 					"breakStart": {
 						"type": "number"
 					},
-					"breakLength": {
+					"breakEnd": {
 						"type": "number"
 					}
 				}

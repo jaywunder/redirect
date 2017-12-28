@@ -1,0 +1,73 @@
+button, input {
+  padding: .5em;
+  border-radius: .25em;
+  border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
+  border-style: solid;
+  border-width: 1px;
+  font-size: .9em;
+}
+
+input ~ button {
+  margin: 1em;
+}
+
+.DistractionList li {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+}
+
+.App h1 {
+  margin-bottom: 0;
+}
+
+.App h3 {
+  margin: 0 auto;
+  margin-top: 1.5em;
+  border-bottom: thin solid black
+}
+
+.Delete {
+  position: relative;
+  display: inline-block;
+  height: 12px;
+  width: 12px;
+  background-color: rgba(150, 0, 0, .1);
+  margin: 3px 0.5ex;
+  border-radius: .2em
+}
+
+.Delete::before {
+  position: absolute;
+  background-color: rgba(150, 0, 0, .9);
+  top: 0;
+  left: 0;
+  height: 10px;
+  width: 2px;
+  content: '';
+  transform: rotateZ(-.6rad) translateX(170%) translateY(30%);
+  transform-origin: center;
+}
+
+.Delete::after {
+  position: absolute;
+  background-color: rgba(150, 0, 0, .9);
+  top: 0;
+  left: 0;
+  height: 10px;
+  width: 2px;
+  content: '';
+  transform: rotateZ(.6rad) translateX(220%) translateY(-20%);
+  transform-origin: center;
+}
+
+
+.Clock circle {
+  /* stroke-dashoffset: 367.566341; /* (2pi * r) * ((100 - %)/ 100) */
+  transition: stroke-dashoffset .1s linear;
+  stroke: #666;
+  stroke-width: 1em;
+}
+.Clock .bar {
+  stroke: #FF9F1E;
+}

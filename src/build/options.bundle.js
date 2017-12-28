@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 193);
+/******/ 	return __webpack_require__(__webpack_require__.s = 200);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -37666,7 +37666,14 @@ function sync(state = {}, action) {
 }
 
 /***/ }),
-/* 193 */
+/* 193 */,
+/* 194 */,
+/* 195 */,
+/* 196 */,
+/* 197 */,
+/* 198 */,
+/* 199 */,
+/* 200 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -37675,8 +37682,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(153);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__StateManager__ = __webpack_require__(194);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__App__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__StateManager__ = __webpack_require__(201);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__App__ = __webpack_require__(202);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_redux__ = __webpack_require__(141);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_redux__ = __webpack_require__(180);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__state_reducers__ = __webpack_require__(192);
@@ -37697,7 +37704,7 @@ window.onload = function () {
 };
 
 /***/ }),
-/* 194 */
+/* 201 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -37757,7 +37764,7 @@ Object.defineProperty(StateManager, "contextTypes", {
 });
 
 /***/ }),
-/* 195 */
+/* 202 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -37768,10 +37775,8 @@ Object.defineProperty(StateManager, "contextTypes", {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__util_state__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_popup_BreakView__ = __webpack_require__(196);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_popup_OnView__ = __webpack_require__(198);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_popup_OffView__ = __webpack_require__(199);
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_options_DistractionList__ = __webpack_require__(203);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_options_FocusInput__ = __webpack_require__(205);
 
 
 
@@ -37796,12 +37801,10 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
   }
 
   render() {
-    const isWorking = this.state.sync.isWorking; // const isOnBreak = false
-
-    const isOnBreak = this.state.sync.breakInfo.isOnBreak;
+    const distractions = this.state.sync.distractions;
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
       className: "App"
-    }, !isWorking && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__components_popup_OffView__["a" /* default */], null), isWorking && !isOnBreak && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__components_popup_OnView__["a" /* default */], null), isOnBreak && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_popup_BreakView__["a" /* default */], null));
+    }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h1", null, "Redirect"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__components_options_FocusInput__["a" /* default */], null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_options_DistractionList__["a" /* default */], null));
   }
 
 }
@@ -37816,7 +37819,7 @@ Object.defineProperty(App, "contextTypes", {
 });
 
 /***/ }),
-/* 196 */
+/* 203 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -37827,208 +37830,212 @@ Object.defineProperty(App, "contextTypes", {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__util_state__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Clock__ = __webpack_require__(197);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__util_Delete__ = __webpack_require__(204);
 
 
 
 
 
-class BreakView extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
+
+const Distraction = ({
+  name,
+  enabled,
+  handleToggle,
+  handleRemove
+}) => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("li", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__util_Delete__["a" /* default */], {
+  handleDelete: handleRemove
+}), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
+  type: "checkbox",
+  checked: enabled,
+  onChange: handleToggle
+}), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("span", null, name));
+
+class DistractionList extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
   constructor(...args) {
     super(...args);
-    Object.defineProperty(this, "handleClockCancel", {
+    Object.defineProperty(this, "handleToggle", {
       enumerable: true,
       writable: true,
-      value: () => {
+      value: i => () => {
+        const distractions = this.state.sync.distractions.concat();
+        distractions[i].enabled = !distractions[i].enabled;
         browser.storage.sync.set({
-          breakInfo: Object.assign(this.state.sync.breakInfo, {
-            isOnBreak: false
+          distractions
+        });
+      }
+    });
+    Object.defineProperty(this, "handleRemove", {
+      enumerable: true,
+      writable: true,
+      value: i => () => {
+        const distractions = this.state.sync.distractions.filter((_, j) => i !== j);
+        browser.storage.sync.set({
+          distractions
+        });
+      }
+    });
+    Object.defineProperty(this, "handleAddDistraction", {
+      enumerable: true,
+      writable: true,
+      value: event => {
+        const name = event.target.children[0].value;
+
+        const fn = (elem, i, sum) => elem.name === name;
+
+        if (this.state.sync.distractions.findIndex(fn) < 0) {
+          const distractions = this.state.sync.distractions.concat();
+          distractions.push({
+            name: name,
+            enabled: true
+          });
+          browser.storage.sync.set({
+            distractions
+          });
+        }
+
+        event.target.children[0].value = '';
+      }
+    });
+    const state = this.context.store.getState();
+    this.state = {
+      sync: state.sync
+    };
+  }
+
+  componentDidMount() {
+    this.unsubscribeStore = Object(__WEBPACK_IMPORTED_MODULE_3__util_state__["a" /* subscribe */])(this)('sync');
+  }
+
+  componentWillUnmount() {
+    Object(__WEBPACK_IMPORTED_MODULE_3__util_state__["b" /* unsubscribe */])(this);
+  }
+
+  render() {
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+      className: "DistractionList"
+    }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h3", null, "Distractions"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("form", {
+      onSubmit: this.handleAddDistraction,
+      action: "#"
+    }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
+      type: "text"
+    }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("button", {
+      type: "submit"
+    }, "Add")), this.state.sync.distractions.map(({
+      name,
+      enabled
+    }, i) => __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Distraction, {
+      key: i,
+      name: name,
+      enabled: enabled,
+      handleToggle: this.handleToggle(i),
+      handleRemove: this.handleRemove(i)
+    })));
+  }
+
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = DistractionList;
+
+Object.defineProperty(DistractionList, "contextTypes", {
+  enumerable: true,
+  writable: true,
+  value: {
+    store: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.object
+  }
+});
+
+/***/ }),
+/* 204 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
+
+ // ×××××××××××××
+
+class Delete extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
+  constructor(...args) {
+    var _temp;
+
+    return _temp = super(...args), Object.defineProperty(this, "state", {
+      enumerable: true,
+      writable: true,
+      value: {
+        clicked: false
+      }
+    }), _temp;
+  }
+
+  render() {
+    return this.state.clicked ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+      className: "Delete clicked",
+      onClick: () => this.setState({
+        clicked: false
+      }, this.props.handleDelete)
+    }) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
+      className: "Delete",
+      onClick: () => this.setState({
+        clicked: true
+      }, () => setTimeout(() => this.setState({
+        clicked: false
+      }), 1500))
+    });
+  }
+
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Delete;
+
+
+/***/ }),
+/* 205 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__util_state__ = __webpack_require__(7);
+
+
+
+
+class FocusInput extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
+  constructor(...args) {
+    super(...args);
+    Object.defineProperty(this, "handleSubmit", {
+      enumerable: true,
+      writable: true,
+      value: event => {
+        let focus = event.target.children[0].value; // TODO: put the focus through some shit to make it a valid link
+
+        browser.storage.sync.set({
+          focus
+        });
+        event.target.children[0].value = focus;
+      }
+    });
+    Object.defineProperty(this, "handleFocusChange", {
+      enumerable: true,
+      writable: true,
+      value: event => {
+        this.setState({
+          sync: Object.assign(this.state.sync, {
+            focus: event.target.value
           })
         });
       }
     });
-    const state = this.context.store.getState();
-    this.state = {
-      sync: state.sync
-    };
-  }
-
-  componentDidMount() {
-    this.unsubscribeStore = Object(__WEBPACK_IMPORTED_MODULE_3__util_state__["a" /* subscribe */])(this)('sync');
-  }
-
-  componentWillUnmount() {
-    Object(__WEBPACK_IMPORTED_MODULE_3__util_state__["b" /* unsubscribe */])(this);
-  }
-
-  render() {
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
-      className: "wrapper on-break"
-    }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Clock__["a" /* default */], {
-      startTime: this.state.sync.breakInfo.breakStart,
-      endTime: this.state.sync.breakInfo.breakEnd,
-      onButtonClick: this.handleClockCancel,
-      buttonText: 'end break',
-      buttonColor: 'red'
-    }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h1", {
-      className: "status"
-    }, "On Break"));
-  }
-
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = BreakView;
-
-Object.defineProperty(BreakView, "contextTypes", {
-  enumerable: true,
-  writable: true,
-  value: {
-    store: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.object
-  }
-});
-
-/***/ }),
-/* 197 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__util_state__ = __webpack_require__(7);
-
-
-
-
-class Clock extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
-  constructor(...args) {
-    super(...args);
-    this.state = {
-      totalTime: this.props.endTime - this.props.startTime,
-      remainingTime: this.props.endTime - __WEBPACK_IMPORTED_MODULE_2_moment___default()()
-    };
-    this.interval = setInterval(() => {
-      this.setState({
-        totalTime: this.props.endTime - this.props.startTime,
-        remainingTime: this.props.endTime - __WEBPACK_IMPORTED_MODULE_2_moment___default()()
-      });
-    }, 5000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
-  render() {
-    const AREA = 565.48;
-    const percent = 1 - this.state.remainingTime / this.state.totalTime;
-    const calculatedArea = AREA * percent;
-    const done = percent < 1;
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("svg", {
-      className: "Clock",
-      width: "200",
-      height: "200",
-      viewport: "0 0 100 100",
-      version: "1.1",
-      xmlns: "http://www.w3.org/2000/svg"
-    }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("circle", {
-      r: "90",
-      cx: "100",
-      cy: "100",
-      fill: "transparent",
-      strokeDasharray: "565.48",
-      strokeDashoffset: calculatedArea
-    }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("circle", {
-      className: "bar",
-      r: "90",
-      cx: "100",
-      cy: "100",
-      fill: "transparent",
-      strokeDasharray: "565.48",
-      strokeDashoffset: calculatedArea
-    }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("text", {
-      x: "50%",
-      y: "50%",
-      textAnchor: "middle",
-      fontSize: "15"
-    }, done ? `break ends ${__WEBPACK_IMPORTED_MODULE_2_moment___default()().to(this.props.endTime)}` : `break is done!`), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("text", {
-      x: "50%",
-      y: "60%",
-      textAnchor: "middle",
-      fontSize: "20",
-      stroke: this.props.buttonColor,
-      onClick: this.props.onButtonClick
-    }, this.props.buttonText));
-  }
-
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = Clock;
-
-Object.defineProperty(Clock, "propTypes", {
-  enumerable: true,
-  writable: true,
-  value: {
-    startTime: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.number,
-    endTime: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.number,
-    onButtonClick: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func.isRequired,
-    buttonText: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string,
-    buttonColor: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string
-  }
-});
-Object.defineProperty(Clock, "defaultProps", {
-  enumerable: true,
-  writable: true,
-  value: {
-    onButtonClick: () => {},
-    buttonText: 'Default Button Text',
-    buttonColor: 'black',
-    startTime: __WEBPACK_IMPORTED_MODULE_2_moment___default()(),
-    endTime: __WEBPACK_IMPORTED_MODULE_2_moment___default()().add(1, 'minute')
-  }
-});
-
-/***/ }),
-/* 198 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__util_state__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__PowerButton__ = __webpack_require__(206);
-
-
-
-
-
-class OnView extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
-  constructor(...args) {
-    super(...args);
-    Object.defineProperty(this, "handlePowerButtonClick", {
+    Object.defineProperty(this, "handleCheckBox", {
       enumerable: true,
       writable: true,
-      value: () => {
+      value: event => {
         browser.storage.sync.set({
-          isWorking: false
-        });
-      }
-    });
-    Object.defineProperty(this, "handleBreakButtonClick", {
-      enumerable: true,
-      writable: true,
-      value: minutes => () => {
-        browser.storage.sync.set({
-          breakInfo: {
-            breakStart: Date.now(),
-            breakEnd: Date.now() + minutes * 60000,
-            isOnBreak: true
-          }
+          focusNewTab: event.target.checked
         });
       }
     });
@@ -38047,165 +38054,34 @@ class OnView extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
   }
 
   render() {
+    const isNewTab = this.state.sync.focusNewTab;
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
-      className: "wrapper powered-on"
-    }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__PowerButton__["a" /* default */], {
-      fill: "blue",
-      onClick: this.handlePowerButtonClick
-    }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h1", {
-      className: "status"
-    }, "Enabled"), " ", __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("span", null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
-      className: "breakbuttons"
-    }, "Take a break for", __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("button", {
-      onClick: this.handleBreakButtonClick(5)
-    }, "5"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("button", {
-      onClick: this.handleBreakButtonClick(15)
-    }, "15"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("button", {
-      onClick: this.handleBreakButtonClick(30)
-    }, "30"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("button", {
-      onClick: this.handleBreakButtonClick(60)
-    }, "60"), "minutes"));
+      className: "FocusInput"
+    }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h3", null, "Focus"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("form", {
+      onSubmit: this.handleSubmit,
+      action: "#"
+    }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
+      type: "text",
+      disabled: isNewTab,
+      value: this.state.sync.focus,
+      onChange: this.handleFocusChange
+    }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("button", {
+      type: "submit"
+    }, "Update"), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("br", null), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("label", null, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", {
+      type: "checkbox",
+      checked: isNewTab,
+      onChange: this.handleCheckBox
+    }), "Redirect to new Tab")));
   }
 
 }
-/* harmony export (immutable) */ __webpack_exports__["a"] = OnView;
+/* harmony export (immutable) */ __webpack_exports__["a"] = FocusInput;
 
-Object.defineProperty(OnView, "contextTypes", {
+Object.defineProperty(FocusInput, "contextTypes", {
   enumerable: true,
   writable: true,
   value: {
     store: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.object
-  }
-});
-
-/***/ }),
-/* 199 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__util_state__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__PowerButton__ = __webpack_require__(206);
-
-
-
-
-
-class OffView extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
-  constructor(...args) {
-    super(...args);
-    Object.defineProperty(this, "handlePowerButtonClick", {
-      enumerable: true,
-      writable: true,
-      value: () => {
-        browser.storage.sync.set({
-          isWorking: true
-        });
-      }
-    });
-    const state = this.context.store.getState();
-    this.state = {
-      sync: state.sync
-    };
-  }
-
-  componentDidMount() {
-    this.unsubscribeStore = Object(__WEBPACK_IMPORTED_MODULE_3__util_state__["a" /* subscribe */])(this)('sync');
-  }
-
-  componentWillUnmount() {
-    Object(__WEBPACK_IMPORTED_MODULE_3__util_state__["b" /* unsubscribe */])(this);
-  }
-
-  render() {
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("div", {
-      className: "wrapper powered-off"
-    }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__PowerButton__["a" /* default */], {
-      fill: "grey",
-      onClick: this.handlePowerButtonClick
-    }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("h1", {
-      className: "status"
-    }, "Disabled"));
-  }
-
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = OffView;
-
-Object.defineProperty(OffView, "contextTypes", {
-  enumerable: true,
-  writable: true,
-  value: {
-    store: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.object
-  }
-});
-
-/***/ }),
-/* 200 */,
-/* 201 */,
-/* 202 */,
-/* 203 */,
-/* 204 */,
-/* 205 */,
-/* 206 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__util_state__ = __webpack_require__(7);
-
-
-
-
-class PowerButton extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
-  render() {
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("svg", {
-      viewBox: "0 0 640 640",
-      version: "1.1",
-      xmlns: "http://www.w3.org/2000/svg",
-      preserveAspectRatio: "xMidYMid meet",
-      width: this.props.width,
-      height: this.props.height,
-      onClick: this.props.onClick
-    }, __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("path", {
-      fill: this.props.fill,
-      d: "M275.27 0L365.91 0L365.91 323.16L275.27 323.16L275.27 0Z"
-    }), __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("path", {
-      fill: this.props.fill,
-      d: "M448.95 113.4L458.45 118.55L467.72 124.06L476.76 129.91L485.56 136.09L494.1 142.6L502.38 149.42L510.39 156.55L518.12 163.97L525.56 171.69L532.71 179.68L539.54 187.95L546.06 196.47L552.25 205.25L558.11 214.27L563.63 223.53L568.79 233.01L573.6 242.71L578.03 252.62L582.08 262.73L585.75 273.02L589.01 283.5L591.87 294.14L594.32 304.95L596.34 315.92L597.93 327.03L599.07 338.27L599.77 349.64L600 361.13L599.77 372.61L599.07 383.98L597.93 395.23L596.34 406.34L594.32 417.3L591.87 428.11L589.01 438.76L585.75 449.23L582.08 459.53L578.03 469.63L573.6 479.54L568.79 489.24L563.63 498.72L558.11 507.98L552.25 517L546.06 525.78L539.54 534.31L532.71 542.57L525.56 550.57L518.12 558.28L510.39 565.71L502.38 572.84L494.1 579.66L485.56 586.16L476.76 592.35L467.72 598.19L458.45 603.7L448.95 608.85L439.23 613.65L429.3 618.07L419.18 622.12L408.86 625.77L398.37 629.03L387.7 631.89L376.87 634.33L365.89 636.35L354.76 637.93L343.49 639.07L332.1 639.77L320.59 640L309.08 639.77L297.69 639.07L286.42 637.93L275.29 636.35L264.31 634.33L253.48 631.89L242.81 629.03L232.31 625.77L222 622.12L211.87 618.07L201.95 613.65L192.23 608.85L182.73 603.7L173.45 598.19L164.41 592.35L155.62 586.16L147.07 579.66L138.79 572.84L130.78 565.71L123.05 558.28L115.61 550.57L108.47 542.57L101.64 534.31L95.12 525.78L88.92 517L83.06 507.98L77.55 498.72L72.38 489.24L67.58 479.54L63.15 469.63L59.1 459.53L55.43 449.23L52.16 438.76L49.3 428.11L46.86 417.3L44.84 406.34L43.25 395.23L42.1 383.98L41.41 372.61L41.18 361.13L41.41 349.64L42.1 338.27L43.25 327.03L44.84 315.92L46.86 304.95L49.3 294.14L52.16 283.5L55.43 273.02L59.1 262.73L63.15 252.62L67.58 242.71L72.38 233.01L77.55 223.53L83.06 214.27L88.92 205.25L95.12 196.47L101.64 187.95L108.47 179.68L115.61 171.69L123.05 163.97L130.78 156.55L138.79 149.42L147.07 142.6L155.62 136.09L164.41 129.91L173.45 124.06L182.73 118.55L192.23 113.4L201.95 108.61L211.87 104.18L220 100.94L220 198.51L215.37 201.5L209.29 205.77L203.39 210.27L197.67 214.98L192.13 219.91L186.79 225.04L181.65 230.37L176.71 235.9L171.99 241.61L167.48 247.5L163.2 253.57L159.15 259.81L155.34 266.2L151.77 272.76L148.45 279.46L145.39 286.31L142.59 293.29L140.06 300.4L137.8 307.64L135.82 315L134.13 322.47L132.74 330.05L131.64 337.73L130.85 345.5L130.37 353.35L130.21 361.29L130.37 369.23L130.85 377.09L131.64 384.86L132.74 392.54L134.13 400.11L135.82 407.58L137.8 414.94L140.06 422.18L142.59 429.3L145.39 436.28L148.45 443.13L151.77 449.83L155.34 456.38L159.15 462.78L163.2 469.01L167.48 475.08L171.99 480.97L176.71 486.69L181.65 492.21L186.79 497.54L192.13 502.67L197.67 507.6L203.39 512.31L209.29 516.81L215.37 521.08L221.62 525.12L228.03 528.93L234.6 532.49L241.31 535.8L248.17 538.86L255.17 541.66L262.3 544.18L269.55 546.44L276.92 548.41L284.41 550.1L292 551.49L299.69 552.59L307.48 553.38L315.35 553.85L323.3 554.02L331.26 553.85L339.13 553.38L346.92 552.59L354.61 551.49L362.2 550.1L369.68 548.41L377.05 546.44L384.31 544.18L391.44 541.66L398.43 538.86L405.29 535.8L412.01 532.49L418.58 528.93L424.99 525.12L431.23 521.08L437.31 516.81L443.22 512.31L448.94 507.6L454.47 502.67L459.81 497.54L464.96 492.21L469.89 486.69L474.62 480.97L479.12 475.08L483.4 469.01L487.45 462.78L491.26 456.38L494.83 449.83L498.15 443.13L501.21 436.28L504.01 429.3L506.55 422.18L508.8 414.94L510.78 407.58L512.47 400.11L513.87 392.54L514.97 384.86L515.76 377.09L516.24 369.23L516.4 361.29L516.24 353.35L515.76 345.5L514.97 337.73L513.87 330.05L512.47 322.47L510.78 315L508.8 307.64L506.55 300.4L504.01 293.29L501.21 286.31L498.15 279.46L494.83 272.76L491.26 266.2L487.45 259.81L483.4 253.57L479.12 247.5L474.62 241.61L469.89 235.9L464.96 230.37L459.81 225.04L454.47 219.91L448.94 214.98L443.22 210.27L437.31 205.77L431.23 201.5L424.99 197.46L420 194.5L420 100.47L429.3 104.18L439.23 108.61L439.23 108.61L448.95 113.4Z"
-    }));
-  }
-
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = PowerButton;
-
-Object.defineProperty(PowerButton, "propTypes", {
-  enumerable: true,
-  writable: true,
-  value: {
-    height: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.number,
-    width: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.number,
-    fill: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string,
-    onClick: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.function
-  }
-});
-Object.defineProperty(PowerButton, "defaultProps", {
-  enumerable: true,
-  writable: true,
-  value: {
-    height: 100,
-    width: 100,
-    fill: 'red',
-    onClick: () => {}
   }
 });
 

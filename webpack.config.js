@@ -4,6 +4,7 @@ const webpack = require('webpack')
 module.exports = {
   entry: {
     popup: './src/popup/popup.js',
+    options: './src/options/options.js',
     // background: './src/background.js'
   },
   output: {
@@ -19,8 +20,17 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: [
-              '@babel/preset-env',
-              '@babel/preset-react'
+              // '@babel/preset-env',
+              '@babel/preset-react',
+              // ["env", {
+              //   "targets": {
+              //     "chrome": 52,
+              //   }
+              // }]
+            ],
+            plugins: [
+              ['transform-class-properties', { spec: true }],
+              'transform-async-to-generator',
             ]
           }
         }
